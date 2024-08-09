@@ -1,0 +1,18 @@
+{
+  "name": "cars-game",
+  "version": "1.0.0",
+  "description": "juego de los carritos",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "js",
+    "node"
+  ],
+  "author": "Lisandro Ramirez",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
