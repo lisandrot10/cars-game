@@ -1,47 +1,51 @@
-let pistaUno = new Array(50).fill("=");
+const lenTrack = 50
+let posicionActualUno = lenTrack - 1
+let posicionActualDos = lenTrack - 1
 
-let pistaDos = new Array(50).fill("=");
+let carroAzul = '🚙'
+let carroRojo = '🚗'
 
-pistaUno.push("🚗");
-pistaDos.push("🚙");
-
-let posicionActualUno = pistaUno.indexOf("🚗");
-
-let posicionActualDos = pistaDos.indexOf("🚙");
-
-let intervalId = setInterval(iniciarCarrera, 500);
+const getDistance = () => Math.floor(Math.random() * 3)
 
 function dibujarPista() {
-  console.log(pistaUno.join(""));
-  console.log(pistaDos.join(""));
+  let pistaUno = new Array(lenTrack).fill('=')
+  let pistaDos = new Array(lenTrack).fill('=')
+
+  let avanceUno = Math.max(0, posicionActualUno - getDistance()) 
+  let avanceDos = Math.max(0, posicionActualDos - getDistance()) 
+
+  posicionActualUno = avanceUno
+  posicionActualDos = avanceDos
+
+  pistaUno[avanceUno] = carroRojo
+  pistaDos[avanceDos] = carroAzul
+
+  console.clear()
+  console.log(pistaUno.join(''))
+  console.log(pistaDos.join(''))
 }
+
+
 
 function iniciarCarrera() {
-  let avanceUno = Math.floor(Math.random() * 3) + 1;
-  let avanceDos = Math.floor(Math.random() * 3) + 1;
-  console.clear();
-  dibujarPista();
-
-  let posicionActualUno = pistaUno.indexOf("🚗");
-  let nuevaPosicionUno = Math.max(0, posicionActualUno - avanceUno);
-  let posicionActualDos = pistaDos.indexOf("🚙");
-  let nuevaPosicionDos = Math.max(0, posicionActualDos - avanceDos);
-
-  if (posicionActualUno && posicionActualDos === 0) {
-    console.log(`Empate! ambos carros llegaron al mismo tiempo`);
-    clearInterval(intervalId);
+  if (posicionActualUno === 0 && posicionActualDos === 0) {
+    console.log(`Empate! ambos carros llegaron al mismo tiempo`)
+    clearInterval(intervalId)
+    return
   }
   if (posicionActualUno === 0) {
-    console.log(`el carro 🚗 es el ganador`);
-    clearInterval(intervalId);
+    console.log(`el carro 🚗 es el ganador`)
+    clearInterval(intervalId)
+    return
   }
   if (posicionActualDos === 0) {
-    console.log(`el carro 🚙 es el ganador`);
-    clearInterval(intervalId);
+    console.log(`el carro 🚙 es el ganador`)
+    clearInterval(intervalId)
+    return
   }
 
-  pistaUno[posicionActualUno] = "=";
-  pistaDos[posicionActualDos] = "=";
-  pistaUno[nuevaPosicionUno] = "🚗";
-  pistaDos[nuevaPosicionDos] = "🚙";
+  dibujarPista()
 }
+
+
+let intervalId = setInterval(iniciarCarrera, 500)
